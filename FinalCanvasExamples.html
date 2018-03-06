@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<!--BY IBRAHIM ADAM-->
+
+<!-- Code used from W3 Schools. URLs are as follows:-->
+<!-- To create a canvas = https://www.w3schools.com/html/html5_canvas.asp -->
+<!-- To create an Arc = https://www.w3schools.com/tags/canvas_arc.asp -->
+<!-- To create an Rectangle = https://www.w3schools.com/tags/canvas_rect.asp -->
+<!-- To create a line = https://www.w3schools.com/html/html5_canvas.asp -->
+<!-- To close a path = https://www.w3schools.com/tags/canvas_closepath.asp -->
+<!-- To create a function = https://www.w3schools.com/js/js_functions.asp -->
+
+<!--Animation code taken from Codepen: https://codepen.io/codingdefined/pen/pjLXJL-->
+
+<head>
+    <meta charset="UTF-8" lang="en">
+    <title>Static canvas: Pacman</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <!--Font imported from Google fonts.-->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+        /*Font imported from Google fonts.*/
+
+        body {
+            font-family: 'Roboto Slab', serif;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!--Static example H1, p and canvas set up-->
+    <h1>Static example</h1>
+    <p>This is my static example drawn using HTML 5 Canvas and JavaScript functions.</p>
+    <!--Canvas set up-->
+    <canvas id="Pacman" width="1300" height="450" style="border:2px solid #000000; background: black;"></canvas>
+
+    <!--Animated example H1, p and canvas set up-->
+    <h1>Animated example</h1>
+    <p>This is my animation drawn using HTML 5 Canvas and JavaScript functions.</p>
+    <!--Canvas set up-->
+    <canvas id="canvas" style='background-color: black;' width='500' height='400'></canvas>
+
+    <script>
+        // STATIC CANVAS EXAMPLE............................//
+        var canvas = document.getElementById('Pacman');
+        var ctx = canvas.getContext('2d');
+        // Once only......................//
+
+        // Pacman's body..................................//
+
+        // Pacman's head....................................//
+        var pHead = circle(400, 225, 120, 0, 2 * Math.PI)
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+
+        // Pacman's eye...................................//
+        var pEye = circle(440, 170, 13, 0, 2 * Math.PI)
+        ctx.fillStyle = "black";
+        ctx.fill();
+
+        // Pacman's mouth ...............................//
+        var pMouth = line(400, 250, 560, 190, 560, 290)
+
+        // Targets.........................................//
+
+        // Target 1.......................................//
+        var target1 = circle(600, 250, 10, 0, 2 * Math.PI)
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+
+        // Target 2.......................................//
+        var target2 = circle(650, 250, 10, 0, 2 * Math.PI)
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+
+        // Target 3.......................................//
+        var target3 = circle(700, 250, 10, 0, 2 * Math.PI)
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+
+        // Monsters........................................//
+
+        // Monster 1........................................//
+        // Monster head........................................//
+        var m1Head = circle(819, 229, 19, 0, 2 * Math.PI)
+        ctx.fillStyle = "orange";
+        ctx.fill();
+
+        // Monster 1 body........................................//
+        var m1Body = rectangle(800, 230, 38, 35)
+        ctx.fillStyle = "orange";
+        ctx.fill();
+
+        // Monster 1 left eye....................................//
+        var m1EyeLeft = circle(808, 223, 4, 0, 2 * Math.PI)
+        ctx.fillStyle = "white";
+        ctx.fill();
+
+        // Monster 1 right eye....................................//
+        var m1EyeRight = circle(820, 223, 4, 0, 2 * Math.PI)
+        ctx.fillStyle = "white";
+        ctx.fill();
+
+        // Left leg...............//
+        var m1LeftLeg = line(775, 300, 810, 252, 835, 290)
+
+        // Right leg...............//
+        var m1RightLeg = line(780, 300, 832, 252, 850, 290)
+
+        // Monster 2........................................//
+        // Monster 2 head........................................//
+        var m2Head = circle(879, 229, 19, 0, 2 * Math.PI)
+        ctx.fillStyle = "blue";
+        ctx.fill();
+
+        // Monster 2 body........................................//
+        var m2Body = rectangle(860, 230, 38, 35)
+        ctx.fillStyle = "blue";
+        ctx.fill();
+
+        // Monster 2 left eye....................................//
+        var m2EyeLeft = circle(868, 223, 4, 0, 2 * Math.PI)
+        ctx.fillStyle = "white";
+        ctx.fill();
+
+        // Monster 2 right eye....................................//
+        var m2EyeRight = circle(880, 223, 4, 0, 2 * Math.PI)
+        ctx.fillStyle = "white";
+        ctx.fill();
+
+        // Left leg...............//
+        var m2LeftLeg = line(835, 300, 870, 252, 895, 290)
+
+        // Right leg...............//
+        var m2RightLeg = line(840, 300, 892, 252, 910, 290)
+
+
+        // ANIMATED CANVAS EXAMPLE...........................................................//
+        var context = document.getElementById("canvas");
+        var ctx = context.getContext("2d");
+        // Canvas setup - only once.......................................//
+
+        // Variable......//
+
+        // Starting position of each element on the canvas..// 
+        var x = 0,
+            y = 0,
+            x1 = 90,
+            y1 = 90;
+        value = 4; // Speed of shapes moving...//
+
+        // Function called for the animation frame..............//
+        requestAnimationFrame(animateFunction);
+
+        // Specifying the animate function.....................//
+        function animateFunction() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            var circle1 = circle(x1, y1, 15, 0, 2 * Math.PI)
+            ctx.fillStyle = "white";
+            ctx.fill();
+            ctx.fillStyle = "white";
+            ctx.fillRect(x, y, 30, 30);
+
+
+            // If statements to code the behaviour of moving elements on the canvas e.g. position, speed....//
+
+            // Rectangle behaviour....//
+            // If x is greater than or equal to 0, then follow the instructions within the statement.//
+            // If x greater than 473, then it will the follow the x and y values.//
+            if (x >= 0) {
+                x += value;
+                if (x > 473) {
+                    y += value;
+                    x -= value;
+                }
+            }
+
+            // If y is greater than 500, then follow the x and y instructions within the statement.//
+            if (y > 500) {
+                x = 0;
+                y = 0;
+            }
+
+
+            // Circle behaviour.......//
+            // If x1 is greater than or equal to 0, then follow the instructions within the statement.//
+            // If x1 is greater than 400, then it will the follow the x1 and y1 values.// 
+            if (x1 >= 0) {
+                x1 += value;
+                if (x1 > 400) {
+                    y1 += value;
+                    x1 -= value;
+                }
+            }
+
+            // If y1 is greater than 500, then follow the x1 and y1 instructions within the statement.//
+            if (y1 > 500) {
+                x1 = 90;
+                y1 = 90;
+            }
+
+            // Function called for the animation frame..............//
+            requestAnimationFrame(animateFunction);
+        }
+
+        // Functions..............................................//
+
+        // Circle function.......................................//
+        function circle(X, Y, R, sAngle, eAngle, startBoolean) {
+            ctx.beginPath();
+            ctx.arc(X, Y, R, sAngle, eAngle, startBoolean);
+        }
+
+        // Rectangle function.....................//
+        function rectangle(X, Y, width, height) {
+            ctx.beginPath();
+            ctx.rect(X, Y, width, height);
+        }
+
+        // Line function..........................//
+        function line(mX, mY, lX, lY, lX1, lY2) {
+            ctx.beginPath();
+            ctx.moveTo(mX, mY);
+            ctx.lineTo(lX, lY);
+            ctx.lineTo(lX1, lY2);
+            ctx.closePath();
+            ctx.fillStyle = "black";
+            ctx.fill();
+        }
+
+    </script>
+</body>
+
+</html>
